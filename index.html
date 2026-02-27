@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEB TEC-TEC · Soluções Digitais Inteligentes</title>
-    <!-- Font Awesome 6 (CDN) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -21,12 +23,11 @@
             scroll-behavior: smooth;
         }
 
-        /* variáveis modernas – toque tecnológico e acessível */
         :root {
-            --primary: #5a45ff;       /* roxo digital */
+            --primary: #5a45ff;
             --primary-dark: #3b2bb3;
-            --secondary: #00c9b7;      /* verde‑água para detalhes */
-            --accent: #ff8a5c;         /* laranja suave para CTAs */
+            --secondary: #00c9b7;
+            --accent: #ff8a5c;
             --dark: #0f172a;
             --gray: #475569;
             --light: #f1f5f9;
@@ -42,7 +43,6 @@
             padding: 0 2rem;
         }
 
-        /* tipografia */
         h1, h2, h3 {
             font-weight: 700;
             letter-spacing: -0.02em;
@@ -69,11 +69,10 @@
             margin: 0 auto 3.5rem auto;
         }
 
-        /* header premium com QR Code (inspiração Piaçabuçu) */
+        /* Header */
         .header {
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
@@ -108,12 +107,6 @@
             font-size: 1.8rem;
             font-weight: 800;
             box-shadow: 0 12px 18px -8px rgba(90,69,255,0.4);
-            transform: rotate(3deg);
-            transition: transform 0.2s;
-        }
-
-        .logo-mark:hover {
-            transform: rotate(0deg) scale(1.05);
         }
 
         .logo-text h1 {
@@ -129,16 +122,15 @@
         .logo-text .small {
             font-size: 0.75rem;
             color: var(--gray);
-            letter-spacing: 0.3px;
         }
 
-        /* QR Code no header */
+        /* QR Code header */
         .qrcode-header {
             display: flex;
             align-items: center;
             gap: 0.8rem;
             background: rgba(90,69,255,0.05);
-            padding: 0.5rem 1.2rem 0.5rem 0.8rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 100px;
             border: 1px solid rgba(90,69,255,0.2);
         }
@@ -154,11 +146,6 @@
         .qrcode-header span {
             font-size: 0.9rem;
             font-weight: 600;
-        }
-
-        .qrcode-header small {
-            color: var(--gray);
-            font-size: 0.7rem;
         }
 
         .nav-menu ul {
@@ -179,7 +166,6 @@
 
         .nav-menu a i {
             color: var(--primary);
-            font-size: 1rem;
         }
 
         .nav-menu a:hover {
@@ -242,57 +228,6 @@
             margin-bottom: 2rem;
         }
 
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stat-item {
-            background: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 60px;
-            box-shadow: var(--shadow-sm);
-            font-weight: 600;
-        }
-
-        .stat-item i {
-            color: var(--secondary);
-            margin-right: 0.3rem;
-        }
-
-        .hero-visual {
-            flex: 1;
-            background: linear-gradient(145deg, var(--primary), #8875ff);
-            border-radius: 40px;
-            padding: 2.5rem;
-            color: white;
-            box-shadow: var(--shadow-md);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-visual::before {
-            content: "</>";
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            font-size: 10rem;
-            font-weight: 800;
-            opacity: 0.1;
-            color: white;
-        }
-
-        .tech-pill {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(4px);
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Botões */
         .btn-primary {
             background: var(--primary);
             color: white;
@@ -334,7 +269,7 @@
             color: white;
         }
 
-        /* serviços cards */
+        /* Serviços */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -375,10 +310,6 @@
             font-size: 1.5rem;
         }
 
-        .service-card p {
-            color: var(--gray);
-        }
-
         .price-tag {
             margin-top: 1.5rem;
             font-weight: 700;
@@ -389,7 +320,7 @@
             display: inline-block;
         }
 
-        /* Portfólio / projetos desenvolvidos (usando os dados fornecidos) */
+        /* Portfólio */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -419,11 +350,6 @@
         .portfolio-header h3 {
             font-size: 1.6rem;
             margin-bottom: 0.5rem;
-        }
-
-        .portfolio-header .date {
-            font-size: 0.9rem;
-            opacity: 0.8;
         }
 
         .portfolio-stats {
@@ -461,34 +387,7 @@
             border: 1px solid #e2e8f0;
         }
 
-        .portfolio-footer {
-            padding: 1.5rem;
-            border-top: 1px solid #edf2f7;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .btn-mini {
-            background: none;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-
-        .btn-mini i {
-            margin-left: 0.3rem;
-        }
-
-        .btn-mini:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* diferenciais / relacionamento */
+        /* Diferenciais */
         .differentials {
             background: var(--dark);
             color: white;
@@ -521,11 +420,7 @@
             margin: 0 auto 1.5rem;
         }
 
-        .diff-item h4 {
-            font-size: 1.3rem;
-        }
-
-        /* localização / contato */
+        /* Formulário */
         .contact-block {
             background: white;
             border-radius: 2.5rem;
@@ -534,12 +429,88 @@
             margin: 4rem 0;
         }
 
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            justify-content: space-between;
-            align-items: center;
+        .contact-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid white;
+            border-radius: 1rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(90,69,255,0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .success-message,
+        .error-message {
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .error-message {
+            background: #ef4444;
+            color: white;
         }
 
         .address {
@@ -573,34 +544,20 @@
             transition: 0.2s;
         }
 
-        .social-links a:hover {
-            color: var(--secondary);
-        }
-
-        /* footer */
         .footer {
             background: var(--dark);
             color: #cbd5e1;
             padding: 2rem 0;
             text-align: center;
-            border-top: 1px solid #334155;
         }
 
-        /* responsividade */
         @media (max-width: 900px) {
             .hero-grid { flex-direction: column; }
             .nav-menu { display: none; }
             .mobile-menu-btn { display: block; }
-            .qrcode-header .text { display: none; }
-            .header-container { flex-wrap: wrap; }
+            .form-row { grid-template-columns: 1fr; }
         }
 
-        @media (max-width: 600px) {
-            .section-title { font-size: 2rem; }
-            .hero-content h2 { font-size: 2.5rem; }
-        }
-
-        /* mobile menu ativo (simples toggle) */
         .nav-menu.active {
             display: block;
             position: absolute;
@@ -628,11 +585,10 @@
                 </div>
             </div>
 
-            <!-- QR Code (estilo Piaçabuçu) -->
             <div class="qrcode-header">
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%235a45ff'/%3E%3Crect x='20' y='20' width='12' height='12' fill='white'/%3E%3Crect x='40' y='20' width='12' height='12' fill='white'/%3E%3Crect x='60' y='20' width='12' height='12' fill='white'/%3E%3Crect x='20' y='40' width='12' height='12' fill='white'/%3E%3Crect x='60' y='40' width='12' height='12' fill='white'/%3E%3Crect x='20' y='60' width='12' height='12' fill='white'/%3E%3Crect x='40' y='60' width='12' height='12' fill='white'/%3E%3Crect x='60' y='60' width='12' height='12' fill='white'/%3E%3C/svg%3E"
                      alt="QR Code">
-                <div class="text">
+                <div>
                     <span>escaneie</span><br>
                     <small>orçamento rápido</small>
                 </div>
@@ -652,125 +608,73 @@
     </header>
 
     <main>
-        <!-- Hero -->
         <section class="hero">
             <div class="hero-grid container">
                 <div class="hero-content">
                     <h2>
                         <span class="hero-highlight">Soluções digitais</span><br> que fazem seu negócio crescer
                     </h2>
-                    <p>Somos a Web Tec-Tec, especialistas em desenvolvimento de sites, manutenção personalizada e criação de lojas virtuais. Tudo com preço acessível para pequenos e médios empreendedores.</p>
+                    <p>Especialistas em desenvolvimento de sites, manutenção personalizada e criação de lojas virtuais. Preço acessível para pequenos e médios empreendedores.</p>
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                         <a href="#contato" class="btn-primary"><i class="fa-regular fa-message"></i> Fale com a gente</a>
                         <a href="#portfolio" class="btn-outline"><i class="fa-regular fa-eye"></i> Ver cases</a>
                     </div>
-                    <div class="hero-stats">
-                        <div class="stat-item"><i class="fa-regular fa-clock"></i> +15 projetos</div>
-                        <div class="stat-item"><i class="fa-regular fa-face-smile"></i> 100% personalizado</div>
-                    </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="tech-pill"><i class="fa-regular fa-keyboard"></i> HTML5 · CSS3 · JS · Supabase</div>
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Código fonte completo</h3>
-                    <p style="opacity: 0.9;">Entregamos toda a estrutura, com módulos desacoplados e segurança desde o primeiro dia.</p>
+                <div class="hero-visual" style="background: linear-gradient(145deg, var(--primary), #8875ff); border-radius: 40px; padding: 2.5rem; color: white; position: relative; overflow: hidden;">
+                    <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); padding: 0.4rem 1rem; border-radius: 40px; display: inline-block; margin-bottom: 1.5rem;">
+                        <i class="fa-regular fa-keyboard"></i> HTML5 · CSS3 · JS · Supabase
+                    </div>
+                    <h3 style="font-size: 2rem;">Código fonte completo</h3>
+                    <p style="opacity: 0.9;">Entregamos toda a estrutura, com módulos e segurança desde o primeiro dia.</p>
                 </div>
             </div>
         </section>
 
-        <!-- SERVIÇOS (relacionados ao negócio) -->
         <section class="container" id="servicos">
             <h2 class="section-title">Nossos <span>serviços</span></h2>
-            <p class="section-sub">Planos acessíveis que evoluem com o seu negócio. Suporte dedicado e expertise de verdade.</p>
+            <p class="section-sub">Planos acessíveis que evoluem com o seu negócio. Suporte dedicado e expertise.</p>
 
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon"><i class="fa-regular fa-file-code"></i></div>
                     <h3>Site institucional</h3>
-                    <p>Ideal para empresas que querem presença online profissional. Design único, responsivo e otimizado.</p>
+                    <p>Presença online profissional. Design único, responsivo e otimizado.</p>
                     <div class="price-tag">a partir de R$ 1.490</div>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fa-regular fa-cart-shopping"></i></div>
                     <h3>Loja virtual</h3>
-                    <p>E‑commerce completo com gestão de produtos, carrinho e integração com meios de pagamento.</p>
+                    <p>E‑commerce completo com gestão de produtos e integração de pagamentos.</p>
                     <div class="price-tag">a partir de R$ 2.990</div>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fa-regular fa-rotate"></i></div>
                     <h3>Manutenção mensal</h3>
-                    <p>Suporte contínuo, atualizações de segurança, backup e melhorias evolutivas.</p>
+                    <p>Suporte contínuo, atualizações de segurança e melhorias evolutivas.</p>
                     <div class="price-tag">R$ 97/mês</div>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fa-regular fa-puzzle-piece"></i></div>
                     <h3>Sistemas modulares</h3>
-                    <p>Construímos funcionalidades sob medida: painéis admin, módulos de gestão, integrações.</p>
+                    <p>Funcionalidades sob medida: painéis admin, módulos de gestão, integrações.</p>
                     <div class="price-tag">sob consulta</div>
                 </div>
             </div>
         </section>
 
-        <!-- PORTFÓLIO (detalhando os dois projetos fornecidos) -->
         <section class="container" id="portfolio">
             <h2 class="section-title">Projetos <span>desenvolvidos</span></h2>
-            <p class="section-sub">Cada linha de código é pensada na experiência e na performance.</p>
+            <p class="section-sub" id="portfolioSub">Carregando projetos do banco de dados...</p>
 
-            <div class="portfolio-grid">
-                <!-- CARD 1: Imóveis Maceió -->
-                <div class="portfolio-card">
-                    <div class="portfolio-header">
-                        <h3>Imóveis Maceió</h3>
-                        <div class="date"><i class="fa-regular fa-calendar"></i> Gerado em 23/02/2026</div>
-                    </div>
-                    <div class="portfolio-stats">
-                        <span class="stat-badge"><i class="fa-regular fa-file-lines"></i> 9332 linhas</span>
-                        <span class="stat-badge"><i class="fa-regular fa-folder"></i> 18 arquivos</span>
-                        <span class="stat-badge"><i class="fa-regular fa-puzzle-piece"></i> 458 funções JS</span>
-                    </div>
-                    <div class="portfolio-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS modular</span>
-                        <span class="tech-tag">JavaScript (ES6)</span>
-                        <span class="tech-tag">Supabase</span>
-                        <span class="tech-tag">FilterManager</span>
-                        <span class="tech-tag">PDF-unified</span>
-                    </div>
-                    <div class="portfolio-footer">
-                        <span><i class="fa-regular fa-building"></i> Corretor & Consultor</span>
-                        <a href="#" class="btn-mini">Estrutura completa <i class="fa-regular fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- CARD 2: Portal Piaçabuçu -->
-                <div class="portfolio-card">
-                    <div class="portfolio-header" style="background: linear-gradient(135deg, #005CA9, #00A859);">
-                        <h3>Portal Piaçabuçu</h3>
-                        <div class="date"><i class="fa-regular fa-calendar"></i> Prefeitura Municipal</div>
-                    </div>
-                    <div class="portfolio-stats">
-                        <span class="stat-badge"><i class="fa-regular fa-window-maximize"></i> Site oficial</span>
-                        <span class="stat-badge"><i class="fa-regular fa-qrcode"></i> QR code integrado</span>
-                        <span class="stat-badge"><i class="fa-regular fa-universal-access"></i> Acessível</span>
-                    </div>
-                    <div class="portfolio-tech">
-                        <span class="tech-tag">Supabase</span>
-                        <span class="tech-tag">notícias em tempo real</span>
-                        <span class="tech-tag">alto contraste</span>
-                        <span class="tech-tag">mobile first</span>
-                        <span class="tech-tag">font scaling</span>
-                    </div>
-                    <div class="portfolio-footer">
-                        <span><i class="fa-regular fa-landmark"></i> Transparência & serviços</span>
-                        <a href="#" class="btn-mini">Ver <i class="fa-regular fa-arrow-right"></i></a>
-                    </div>
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Projetos serão carregados dinamicamente via Supabase -->
+                <div style="text-align: center; grid-column: 1/-1; padding: 3rem;">
+                    <div class="loading-spinner" style="border: 4px solid var(--light); border-top: 4px solid var(--primary); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                    <p style="margin-top: 1rem;">Carregando portfólio...</p>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 2rem; background: var(--light); padding: 1rem; border-radius: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <i class="fa-regular fa-shield-halved" style="color: var(--primary);"></i> Hospedagem com cibersegurança · PHP, Python, Node, React, Vue
-            </p>
         </section>
 
-        <!-- DIFERENCIAIS (relacionamento, evolução, suporte) -->
         <div class="differentials" id="diferenciais">
             <div class="container">
                 <h2 class="section-title" style="color: white;">nossos <span style="color: var(--secondary);">diferenciais</span></h2>
@@ -783,26 +687,74 @@
                     <div class="diff-item">
                         <i class="fa-regular fa-arrow-trend-up"></i>
                         <h4>Evolução modular</h4>
-                        <p style="opacity: 0.8;">Sistemas que crescem conforme sua demanda, módulo a módulo.</p>
+                        <p style="opacity: 0.8;">Sistemas que crescem conforme sua demanda.</p>
                     </div>
                     <div class="diff-item">
                         <i class="fa-regular fa-headset"></i>
                         <h4>Suporte dedicado</h4>
-                        <p style="opacity: 0.8;">Especialistas alocados no seu projeto, com conhecimento do seu negócio.</p>
+                        <p style="opacity: 0.8;">Especialistas alocados no seu projeto.</p>
                     </div>
                     <div class="diff-item">
                         <i class="fa-regular fa-lock"></i>
                         <h4>Cibersegurança</h4>
-                        <p style="opacity: 0.8;">Servidores preparados, backups e proteção contra ameaças.</p>
+                        <p style="opacity: 0.8;">Servidores preparados e proteção contra ameaças.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- CONTATO / LOCALIZAÇÃO (dados da empresa) -->
         <div class="container" id="contato">
             <div class="contact-block">
-                <div class="contact-info">
+                <h2 style="margin-bottom: 2rem; color: var(--primary);">Solicite um orçamento</h2>
+                
+                <div id="successMessage" class="success-message">
+                    <i class="fa-regular fa-circle-check"></i> Mensagem enviada com sucesso! Entraremos em contato em até 24h.
+                </div>
+                <div id="errorMessage" class="error-message">
+                    <i class="fa-regular fa-circle-exclamation"></i> Erro ao enviar. Tente novamente ou nos chame no WhatsApp.
+                </div>
+
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-regular fa-user"></i> Nome *</label>
+                            <input type="text" id="nome" required placeholder="Seu nome completo">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-regular fa-envelope"></i> E-mail *</label>
+                            <input type="email" id="email" required placeholder="seu@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-regular fa-phone"></i> Telefone</label>
+                            <input type="tel" id="telefone" placeholder="(82) 99999-9999">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-regular fa-window-maximize"></i> Tipo de serviço *</label>
+                            <select id="servico" required>
+                                <option value="">Selecione...</option>
+                                <option value="site institucional">Site institucional</option>
+                                <option value="loja virtual">Loja virtual</option>
+                                <option value="manutenção">Manutenção mensal</option>
+                                <option value="sistema personalizado">Sistema personalizado</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-regular fa-message"></i> Descreva seu projeto *</label>
+                        <textarea id="mensagem" rows="4" required placeholder="Conte-nos sobre sua ideia, necessidades e prazos..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fa-regular fa-paper-plane"></i> Enviar orçamento
+                    </button>
+                </form>
+
+                <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
                     <div class="address">
                         <i class="fa-regular fa-location-dot"></i>
                         <div>
@@ -813,16 +765,13 @@
                     </div>
                     <div class="phones">
                         <a href="tel:+5582999981912"><i class="fa-regular fa-phone"></i> (82) 9.9998-1912</a>
-                        <a href="https://wa.me/5582999981912" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp comercial</a>
+                        <a href="https://wa.me/5582999981912" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
                     </div>
                     <div class="social-links">
-                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://instagram.com/webtectec" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://github.com/WEBTECTEC" target="_blank"><i class="fa-brands fa-github"></i></a>
                     </div>
                 </div>
-                <p style="margin-top: 2rem; font-size: 0.9rem; background: var(--light); padding: 0.8rem; border-radius: 60px;">
-                    <i class="fa-regular fa-code"></i> Código fonte entregue · linguagens modernas · hospedagem com SSL avançado
-                </p>
             </div>
         </div>
     </main>
@@ -830,41 +779,186 @@
     <footer class="footer">
         <div class="container">
             <p>© 2026 WEB TEC‑TEC · tecnologia que aproxima pequenos negócios do futuro</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem;">desenvolvimento, manutenção, loja virtual · módulos personalizados</p>
+            <p style="margin-top: 0.5rem;">desenvolvimento, manutenção, loja virtual · módulos personalizados</p>
         </div>
     </footer>
 
-    <!-- leve script para mobile menu e interação -->
-    <script>
-        (function() {
-            const btn = document.getElementById('mobileBtn');
-            const nav = document.getElementById('navMenu');
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    nav.classList.toggle('active');
-                    btn.innerHTML = nav.classList.contains('active') 
-                        ? '<i class="fa-solid fa-xmark"></i>' 
-                        : '<i class="fa-solid fa-bars"></i>';
-                });
-            }
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
-            // fechar menu ao clicar em link
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 900) {
-                        nav.classList.remove('active');
-                        if (btn) btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
-                    }
-                    // smooth scroll básico
-                    const targetId = link.getAttribute('href');
-                    if (targetId && targetId.startsWith('#')) {
-                        e.preventDefault();
-                        const el = document.getElementById(targetId.substring(1));
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
+    <script>
+        // ===== CONFIGURAÇÃO SUPABASE (COLE SUA ANON KEY AQUI) =====
+        const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
+        const SUPABASE_ANON_KEY = 'SUA_ANON_KEY_AQUI'; // <-- COLE AQUI A CHAVE ANON
+
+        // Inicializar Supabase
+        let supabase;
+        try {
+            supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log('✅ Supabase conectado');
+        } catch (error) {
+            console.error('❌ Erro Supabase:', error);
+        }
+
+        // ===== FORMULÁRIO DE CONTATO =====
+        const form = document.getElementById('contactForm');
+        const successMsg = document.getElementById('successMessage');
+        const errorMsg = document.getElementById('errorMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-regular fa-spinner fa-spin"></i> Enviando...';
+
+                try {
+                    const formData = {
+                        nome: document.getElementById('nome').value,
+                        email: document.getElementById('email').value,
+                        telefone: document.getElementById('telefone').value || null,
+                        tipo_servico: document.getElementById('servico').value,
+                        descricao: document.getElementById('mensagem').value,
+                        created_at: new Date().toISOString()
+                    };
+
+                    const { error } = await supabase
+                        .from('orcamentos')
+                        .insert([formData]);
+
+                    if (error) throw error;
+
+                    successMsg.style.display = 'block';
+                    form.reset();
+                    successMsg.scrollIntoView({ behavior: 'smooth' });
+
+                } catch (error) {
+                    console.error('Erro:', error);
+                    errorMsg.style.display = 'block';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Enviar orçamento';
+                }
             });
-        })();
+        }
+
+        // ===== CARREGAR PROJETOS DO SUPABASE =====
+        async function carregarProjetos() {
+            try {
+                const { data, error } = await supabase
+                    .from('projetos')
+                    .select('*')
+                    .order('id', { ascending: true });
+
+                if (error) throw error;
+
+                const portfolioGrid = document.getElementById('portfolioGrid');
+                const portfolioSub = document.getElementById('portfolioSub');
+
+                if (data && data.length > 0) {
+                    portfolioSub.textContent = 'Confira alguns dos nossos trabalhos:';
+                    portfolioGrid.innerHTML = data.map(projeto => `
+                        <div class="portfolio-card">
+                            <div class="portfolio-header">
+                                <h3>${projeto.titulo}</h3>
+                                <div class="date">${projeto.cliente || 'Cliente'}</div>
+                            </div>
+                            <div class="portfolio-stats">
+                                <span class="stat-badge"><i class="fa-regular fa-file-lines"></i> ${projeto.linhas_codigo || 0} linhas</span>
+                                <span class="stat-badge"><i class="fa-regular fa-folder"></i> ${projeto.arquivos || 0} arquivos</span>
+                                <span class="stat-badge"><i class="fa-regular fa-puzzle-piece"></i> ${projeto.funcoes_js || 0} funções</span>
+                            </div>
+                            <div class="portfolio-tech">
+                                ${(projeto.tecnologias || ['HTML', 'CSS', 'JS']).map(tech => 
+                                    `<span class="tech-tag">${tech}</span>`
+                                ).join('')}
+                            </div>
+                            <div class="portfolio-footer" style="padding: 1.5rem;">
+                                <span>${projeto.descricao?.substring(0, 100)}...</span>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    portfolioGrid.innerHTML = `
+                        <div class="portfolio-card">
+                            <div class="portfolio-header">
+                                <h3>Imóveis Maceió</h3>
+                                <div class="date">Weber Lessa Corretor</div>
+                            </div>
+                            <div class="portfolio-stats">
+                                <span class="stat-badge">9332 linhas</span>
+                                <span class="stat-badge">18 arquivos</span>
+                                <span class="stat-badge">458 funções</span>
+                            </div>
+                            <div class="portfolio-tech">
+                                <span class="tech-tag">HTML5</span>
+                                <span class="tech-tag">CSS3</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Supabase</span>
+                            </div>
+                            <div class="portfolio-footer">
+                                <span>Site para corretor com painel admin e PDFs protegidos...</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-card">
+                            <div class="portfolio-header" style="background: linear-gradient(135deg, #005CA9, #00A859);">
+                                <h3>Portal Piaçabuçu</h3>
+                                <div class="date">Prefeitura Municipal</div>
+                            </div>
+                            <div class="portfolio-stats">
+                                <span class="stat-badge">Site oficial</span>
+                                <span class="stat-badge">QR code</span>
+                                <span class="stat-badge">Acessível</span>
+                            </div>
+                            <div class="portfolio-tech">
+                                <span class="tech-tag">Supabase</span>
+                                <span class="tech-tag">notícias</span>
+                                <span class="tech-tag">alto contraste</span>
+                            </div>
+                            <div class="portfolio-footer">
+                                <span>Portal com transparência e serviços...</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro ao carregar projetos:', error);
+            }
+        }
+
+        // ===== MOBILE MENU =====
+        const mobileBtn = document.getElementById('mobileBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fa-solid fa-xmark"></i>' 
+                    : '<i class="fa-solid fa-bars"></i>';
+            });
+        }
+
+        // Fechar menu ao clicar em link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                if (mobileBtn) mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            });
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarProjetos();
+        });
     </script>
 </body>
 </html>

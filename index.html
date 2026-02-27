@@ -572,6 +572,11 @@
             flex-direction: column;
             gap: 1.5rem;
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -783,17 +788,10 @@
         </div>
     </footer>
 
-    <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-
     <script>
-        // ===== CONFIGURAÇÃO SUPABASE (COLE SUA ANON KEY AQUI) =====
+        // ===== CONFIGURAÇÃO SUPABASE COM SUA CHAVE =====
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
-        const SUPABASE_ANON_KEY = 'SUA_ANON_KEY_AQUI'; // <-- COLE AQUI A CHAVE ANON
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnamdueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NjA3ODQsImV4cCI6MjA1NjIzNjc4NH0.V-nF23Q0OXuJBNu_h4BQy8nJEdBm7q0pK9kadxEubnY';
 
         // Inicializar Supabase
         let supabase;

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>WEB TEC-TEC · Soluções Digitais Inteligentes</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -615,6 +615,70 @@
             color: var(--primary);
         }
 
+        /* NOVO ESTILO PARA TELEFONE/WHATSAPP COMPACT - ATUALIZADO */
+        .phone-whatsapp-compact {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            max-width: fit-content;
+        }
+
+        .phone-whatsapp-compact:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .phone-icons-compact {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        .phone-icons-compact i {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 2.2rem;
+            height: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .phone-icons-compact i:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(5deg);
+        }
+
+        .phone-number-compact {
+            display: flex;
+            align-items: baseline;
+            gap: 0.2rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .phone-prefix-compact {
+            font-weight: 500;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .phone-main-compact {
+            font-weight: 800;
+        }
+
         .phones a {
             display: block;
             text-decoration: none;
@@ -735,29 +799,195 @@
             font-size: 0.9rem;
         }
 
-        @media (max-width: 900px) {
-            .hero-grid { flex-direction: column; }
-            .nav-menu { display: none; }
-            .mobile-menu-btn { display: block; }
-            .form-row { grid-template-columns: 1fr; }
-            .qrcode-header .text { display: none; }
-            .qrcode-header { padding: 0.5rem; }
-            .logo-image { width: 80px; }
+        /* ===== MEDIA QUERIES PARA MOBILE ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .header-container {
+                padding: 0.8rem 1.5rem;
+                flex-wrap: wrap;
+            }
+
+            .logo-area {
+                gap: 0.8rem;
+            }
+
+            .logo-image {
+                width: 60px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo-text .small {
+                font-size: 0.65rem;
+            }
+
+            .qrcode-header {
+                padding: 0.4rem;
+            }
+
+            .qrcode-header img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .qrcode-header .text {
+                display: none;
+            }
+
+            .hero-grid {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .hero-visual {
+                padding: 1.5rem !important;
+            }
+
+            .hero-visual h3 {
+                font-size: 1.5rem !important;
+            }
+
+            .tech-container {
+                padding: 0.4rem 0.8rem;
+                gap: 0.4rem;
+            }
+
+            .tech-item {
+                font-size: 0.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-block {
+                padding: 1.5rem;
+                border-radius: 2rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .address {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .phones {
+                text-align: center;
+                width: 100%;
+            }
+
+            .social-links {
+                text-align: center;
+                width: 100%;
+            }
+
+            .social-links a {
+                font-size: 1.5rem;
+                margin: 0 0.5rem;
+            }
+
+            /* Ajuste para o bloco de contato no footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-col p {
+                justify-content: center;
+            }
+
+            /* NOVO: Ajuste para o phone-whatsapp-compact no mobile */
+            .phone-whatsapp-compact {
+                padding: 0.5rem 1rem;
+                gap: 0.5rem;
+                margin: 0 auto; /* Centraliza em telas pequenas */
+            }
+
+            .phone-icons-compact i {
+                width: 1.8rem;
+                height: 1.8rem;
+                font-size: 1rem;
+            }
+
+            .phone-number-compact {
+                font-size: 1rem;
+            }
+
+            .phone-prefix-compact {
+                font-size: 0.9rem;
+            }
+
+            /* Menu mobile */
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 2rem;
+                box-shadow: var(--shadow-md);
+            }
+
+            .nav-menu.active ul {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
         }
 
-        .nav-menu.active {
-            display: block;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: white;
-            padding: 2rem;
-            box-shadow: var(--shadow-md);
-        }
-        .nav-menu.active ul {
-            flex-direction: column;
-            gap: 1.5rem;
+        @media (max-width: 480px) {
+            .phone-number-compact {
+                font-size: 0.9rem;
+            }
+            
+            .phone-prefix-compact {
+                font-size: 0.8rem;
+            }
+            
+            .phone-icons-compact i {
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.9rem;
+            }
         }
 
         @keyframes spin {
@@ -1036,13 +1266,23 @@
                             Maceió - AL, 57010-190
                         </div>
                     </div>
-                    <div class="phones">
-                        <a href="tel:+5582999981912">i class="fa-brands fa-whatsapp"><i class="fa-regular fa-phone"></i> (82) 9.9998-1912</a>
-                        <a href="https://wa.me/5582999981912" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    
+                    <!-- NOVO BLOCO DE TELEFONE/WHATSAPP ATUALIZADO CONFORME SOLICITADO -->
+                    <div class="phone-whatsapp-compact">
+                        <div class="phone-icons-compact">
+                            <i class="fas fa-mobile-alt"></i>
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="phone-number-compact">
+                            <span class="phone-prefix-compact">(82)</span>
+                            <span class="phone-main-compact">9.9998-1912</span>
+                        </div>
                     </div>
+                    
                     <div class="social-links">
-                        <a href="https://instagram.com/webtectec" target="_blank"><i class="fa-brands fa-instagram"></i> @webtectec</a>
-                        <a href="https://bit.ly/wt-com-br" target="_blank"><i class="fa-regular fa-globe"></i> bit.ly/wt-com-br</a>
+                        <a href="https://instagram.com/webtectec" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://bit.ly/wt-com-br" target="_blank"><i class="fa-regular fa-globe"></i></a>
+                        <a href="https://wa.me/5582999981912" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>

@@ -124,7 +124,7 @@
             color: var(--gray);
         }
 
-        /* QR Code header */
+        /* QR CODE NO HEADER */
         .qrcode-header {
             display: flex;
             align-items: center;
@@ -133,6 +133,13 @@
             padding: 0.5rem 1.2rem;
             border-radius: 100px;
             border: 1px solid rgba(90,69,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .qrcode-header:hover {
+            background: rgba(90,69,255,0.1);
+            transform: scale(1.02);
+            box-shadow: var(--shadow-sm);
         }
 
         .qrcode-header img {
@@ -141,11 +148,18 @@
             border-radius: 12px;
             background: white;
             padding: 4px;
+            object-fit: contain;
         }
 
         .qrcode-header span {
             font-size: 0.9rem;
             font-weight: 600;
+            color: var(--primary);
+        }
+
+        .qrcode-header small {
+            color: var(--gray);
+            font-size: 0.7rem;
         }
 
         .nav-menu ul {
@@ -549,11 +563,104 @@
             transition: 0.2s;
         }
 
+        /* QR CODE NO FOOTER */
+        .qrcode-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem 1.5rem;
+            border-radius: 2rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .qrcode-footer:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .qrcode-footer img {
+            width: 120px;
+            height: 120px;
+            border-radius: 1.5rem;
+            background: white;
+            padding: 10px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .qrcode-footer img:hover {
+            transform: scale(1.05);
+        }
+
+        .qrcode-footer h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .qrcode-footer p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+
+        .qrcode-footer .site-url {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            color: white;
+        }
+
         .footer {
             background: var(--dark);
             color: #cbd5e1;
-            padding: 2rem 0;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
             text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
         }
 
         @media (max-width: 900px) {
@@ -561,6 +668,8 @@
             .nav-menu { display: none; }
             .mobile-menu-btn { display: block; }
             .form-row { grid-template-columns: 1fr; }
+            .qrcode-header .text { display: none; }
+            .qrcode-header { padding: 0.5rem; }
         }
 
         .nav-menu.active {
@@ -595,15 +704,16 @@
                 </div>
             </div>
 
-            <!-- QR CODE - Substitua pelo seu arquivo real -->
-            <div class="qrcode-header">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%235a45ff'/%3E%3Crect x='20' y='20' width='12' height='12' fill='white'/%3E%3Crect x='40' y='20' width='12' height='12' fill='white'/%3E%3Crect x='60' y='20' width='12' height='12' fill='white'/%3E%3Crect x='20' y='40' width='12' height='12' fill='white'/%3E%3Crect x='60' y='40' width='12' height='12' fill='white'/%3E%3Crect x='20' y='60' width='12' height='12' fill='white'/%3E%3Crect x='40' y='60' width='12' height='12' fill='white'/%3E%3Crect x='60' y='60' width='12' height='12' fill='white'/%3E%3C/svg%3E"
-                     alt="QR Code">
-                <div>
-                    <span>escaneie</span><br>
-                    <small>orçamento rápido</small>
+            <!-- QR CODE NO HEADER (ACESSO RÁPIDO) -->
+            <a href="https://webtectec.github.io/webtectec" target="_blank" style="text-decoration: none;">
+                <div class="qrcode-header">
+                    <img src="qr-code.png" alt="QR Code WEB TEC-TEC">
+                    <div class="text">
+                        <span><i class="fa-regular fa-qrcode"></i> Acesso rápido</span><br>
+                        <small>escaneie e acesse</small>
+                    </div>
                 </div>
-            </div>
+            </a>
 
             <button class="mobile-menu-btn" id="mobileBtn"><i class="fa-solid fa-bars"></i></button>
 
@@ -678,7 +788,7 @@
             <p class="section-sub" id="portfolioSub">Conheça alguns dos nossos trabalhos:</p>
 
             <div class="portfolio-grid" id="portfolioGrid">
-                <!-- PROJETOS ESTÁTICOS (SEM SUPABASE) -->
+                <!-- PROJETOS ESTÁTICOS -->
                 <div class="portfolio-card">
                     <div class="portfolio-header">
                         <h3>Imóveis Maceió</h3>
@@ -853,8 +963,39 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2026 WEB TEC‑TEC · tecnologia que aproxima pequenos negócios do futuro</p>
-            <p style="margin-top: 0.5rem;">desenvolvimento, manutenção, loja virtual · módulos personalizados</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>WEB TEC-TEC</h3>
+                    <p>Soluções digitais inteligentes para pequenos e médios empreendedores.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                        <li><a href="#diferenciais">Diferenciais</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p><i class="fa-regular fa-phone"></i> (82) 9.9998-1912</p>
+                    <p><i class="fa-regular fa-envelope"></i> contato@webtectec.com.br</p>
+                </div>
+            </div>
+
+            <!-- QR CODE NO FOOTER (VERSÃO COMPLETA) -->
+            <div class="qrcode-footer">
+                <img src="qr-code.png" alt="QR Code WEB TEC-TEC">
+                <h4><i class="fa-regular fa-qrcode"></i> Acesse pelo celular</h4>
+                <p>Escaneie o QR Code e visite nosso site</p>
+                <div class="site-url">webtectec.github.io/webtectec</div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 WEB TEC‑TEC · tecnologia que aproxima pequenos negócios do futuro</p>
+                <p style="margin-top: 0.5rem;">desenvolvimento, manutenção, loja virtual · módulos personalizados</p>
+            </div>
         </div>
     </footer>
 
@@ -863,7 +1004,7 @@
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnamdueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NjA3ODQsImV4cCI6MjA1NjIzNjc4NH0.V-nF23Q0OXuJBNu_h4BQy8nJEdBm7q0pK9kadxEubnY';
 
-        // Inicializar Supabase (usando nome diferente para evitar conflito)
+        // Inicializar Supabase
         let supabaseClient;
         try {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

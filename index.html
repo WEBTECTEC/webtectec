@@ -35,6 +35,7 @@
             --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
             --shadow-md: 0 20px 30px -10px rgba(90, 69, 255, 0.15);
             --border-radius: 1.5rem;
+            --border-radius-sm: 1rem;
             
             /* Cores das tecnologias */
             --html-color: #e34c26;
@@ -76,6 +77,33 @@
             margin: 0 auto 3.5rem auto;
         }
 
+        /* Badges de classificação */
+        .classification-badge {
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .badge-locacao {
+            background: linear-gradient(135deg, #FF8A5C, #FF6B4A);
+            color: white;
+        }
+
+        .badge-aquisicao {
+            background: linear-gradient(135deg, #00C9B7, #00B5A0);
+            color: white;
+        }
+
+        .badge-locacao i, .badge-aquisicao i {
+            margin-right: 0.3rem;
+        }
+
         /* Header */
         .header {
             background: rgba(255,255,255,0.8);
@@ -102,7 +130,7 @@
             gap: 1.5rem;
         }
 
-        /* LOGO DA EMPRESA - AGORA 4x MAIOR (192px) */
+        /* LOGO DA EMPRESA */
         .logo-image {
             width: 192px;
             height: auto;
@@ -355,10 +383,10 @@
             font-weight: 300;
         }
 
-        /* Serviços */
+        /* Serviços - ATUALIZADO COM CLASSIFICAÇÕES */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
@@ -370,12 +398,30 @@
             box-shadow: var(--shadow-sm);
             transition: all 0.25s;
             border: 1px solid rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
         }
 
         .service-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-md);
             border-color: var(--primary);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
         }
 
         .service-icon {
@@ -396,6 +442,29 @@
             font-size: 1.5rem;
         }
 
+        .service-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            margin: 1rem 0;
+            padding-left: 1.2rem;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .service-features li {
+            margin-bottom: 0.3rem;
+        }
+
+        .service-features i {
+            color: var(--secondary);
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+
         .price-tag {
             margin-top: 1.5rem;
             font-weight: 700;
@@ -404,6 +473,7 @@
             padding: 0.4rem 1rem;
             border-radius: 30px;
             display: inline-block;
+            font-size: 1.2rem;
         }
 
         /* Portfólio */
@@ -615,7 +685,7 @@
             color: var(--primary);
         }
 
-        /* NOVO ESTILO PARA TELEFONE/WHATSAPP COMPACT - ATUALIZADO */
+        /* ESTILO PARA TELEFONE/WHATSAPP COMPACT */
         .phone-whatsapp-compact {
             display: flex;
             align-items: center;
@@ -917,7 +987,6 @@
                 margin: 0 0.5rem;
             }
 
-            /* Ajuste para o bloco de contato no footer */
             .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -927,11 +996,10 @@
                 justify-content: center;
             }
 
-            /* NOVO: Ajuste para o phone-whatsapp-compact no mobile */
             .phone-whatsapp-compact {
                 padding: 0.5rem 1rem;
                 gap: 0.5rem;
-                margin: 0 auto; /* Centraliza em telas pequenas */
+                margin: 0 auto;
             }
 
             .phone-icons-compact i {
@@ -948,7 +1016,6 @@
                 font-size: 0.9rem;
             }
 
-            /* Menu mobile */
             .nav-menu {
                 display: none;
             }
@@ -988,6 +1055,11 @@
                 height: 1.5rem;
                 font-size: 0.9rem;
             }
+
+            .classification-badge {
+                font-size: 0.8rem;
+                padding: 0.2rem 1rem;
+            }
         }
 
         @keyframes spin {
@@ -1000,7 +1072,6 @@
     <header class="header">
         <div class="header-container">
             <div class="logo-area">
-                <!-- LOGO DA EMPRESA - AGORA 2x (96px) -->
                 <img src="wtlogo.jpg" alt="WEB TEC-TEC Logo" class="logo-image">
                 <div class="logo-text">
                     <h1>WEB <span class="tech">TEC-TEC</span></h1>
@@ -1010,7 +1081,6 @@
                 </div>
             </div>
 
-            <!-- QR CODE NO HEADER (ACESSO RÁPIDO) -->
             <a href="https://webtectec.github.io/webtectec" target="_blank" style="text-decoration: none;">
                 <div class="qrcode-header">
                     <img src="qr-code.png" alt="QR Code WEB TEC-TEC">
@@ -1048,7 +1118,6 @@
                     </div>
                 </div>
                 <div class="hero-visual" style="background: linear-gradient(145deg, var(--primary), #8875ff); border-radius: 40px; padding: 2.5rem; color: white; position: relative; overflow: hidden;">
-                    <!-- CONTAINER DE TECNOLOGIAS COM BOTÕES COLORIDOS -->
                     <div class="tech-container">
                         <span class="tech-item postgresql"><i class="fa-regular fa-database"></i> PostgreSQL</span>
                         <span class="tech-divider">·</span>
@@ -1071,28 +1140,73 @@
             <p class="section-sub">Planos acessíveis que evoluem com o seu negócio. Suporte dedicado e expertise.</p>
 
             <div class="services-grid">
+                <!-- LOCAÇÃO: Site COMERCIAL E INSTITUCIONAL -->
                 <div class="service-card">
+                    <span class="classification-badge badge-locacao"><i class="fa-regular fa-calendar"></i> LOCAÇÃO</span>
                     <div class="service-icon"><i class="fa-regular fa-file-code"></i></div>
-                    <h3>Site institucional</h3>
-                    <p>Presença online profissional. Design único, responsivo e otimizado.</p>
-                    <div class="price-tag">a partir de R$ 1.490</div>
+                    <h3>Site COMERCIAL E institucional</h3>
+                    <div class="service-description">
+                        Presença online profissional. Design único, responsivo e otimizado.
+                    </div>
+                    <ul class="service-features">
+                        <li><i class="fa-regular fa-circle-check"></i> Design responsivo</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Otimizado para SEO</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Suporte incluso</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Hospedagem inclusa</li>
+                    </ul>
+                    <div class="price-tag">a partir de R$ 198/mês</div>
                 </div>
+
+                <!-- LOCAÇÃO: Loja virtual -->
                 <div class="service-card">
+                    <span class="classification-badge badge-locacao"><i class="fa-regular fa-calendar"></i> LOCAÇÃO</span>
                     <div class="service-icon"><i class="fa-regular fa-cart-shopping"></i></div>
                     <h3>Loja virtual</h3>
-                    <p>E‑commerce completo com gestão de produtos e integração de pagamentos.</p>
-                    <div class="price-tag">a partir de R$ 2.990</div>
+                    <div class="service-description">
+                        E‑commerce completo com gestão de produtos e integração de pagamentos.
+                    </div>
+                    <ul class="service-features">
+                        <li><i class="fa-regular fa-circle-check"></i> Catálogo de produtos</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Carrinho de compras</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Gateway de pagamento</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Painel administrativo</li>
+                    </ul>
+                    <div class="price-tag">a partir de R$ 298/mês</div>
                 </div>
+
+                <!-- LOCAÇÃO: Manutenção mensal -->
                 <div class="service-card">
+                    <span class="classification-badge badge-locacao"><i class="fa-regular fa-calendar"></i> LOCAÇÃO</span>
                     <div class="service-icon"><i class="fa-regular fa-rotate"></i></div>
                     <h3>Manutenção mensal</h3>
-                    <p>Suporte contínuo, atualizações de segurança e melhorias evolutivas.</p>
+                    <div class="service-description">
+                        Suporte contínuo, atualizações de segurança e melhorias evolutivas.
+                    </div>
+                    <ul class="service-features">
+                        <li><i class="fa-regular fa-circle-check"></i> Atualizações de segurança</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Backup diário</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Monitoramento 24/7</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Suporte prioritário</li>
+                    </ul>
                     <div class="price-tag">R$ 97/mês</div>
                 </div>
+
+                <!-- AQUISIÇÃO: Sistemas modulares -->
                 <div class="service-card">
+                    <span class="classification-badge badge-aquisicao"><i class="fa-regular fa-cart-plus"></i> AQUISIÇÃO</span>
                     <div class="service-icon"><i class="fa-regular fa-puzzle-piece"></i></div>
                     <h3>Sistemas modulares</h3>
-                    <p>Funcionalidades sob medida: painéis admin, módulos de gestão, integrações.</p>
+                    <div class="service-description">
+                        Funcionalidades sob medida: painéis admin, módulo de estoque, módulo de E-commerce, módulos de gestão, integrações.
+                    </div>
+                    <ul class="service-features">
+                        <li><i class="fa-regular fa-circle-check"></i> Painel administrativo</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Módulo de estoque</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Módulo de E-commerce</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Módulos de gestão</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Integrações personalizadas</li>
+                        <li><i class="fa-regular fa-circle-check"></i> Código fonte completo</li>
+                    </ul>
                     <div class="price-tag">sob consulta</div>
                 </div>
             </div>
@@ -1103,7 +1217,6 @@
             <p class="section-sub" id="portfolioSub">Conheça alguns dos nossos trabalhos:</p>
 
             <div class="portfolio-grid" id="portfolioGrid">
-                <!-- PROJETOS ESTÁTICOS - ATUALIZADO CONFORME SOLICITADO -->
                 <div class="portfolio-card">
                     <div class="portfolio-header">
                         <h3>Imóveis Maceió</h3>
@@ -1246,10 +1359,10 @@
                             <label><i class="fa-regular fa-window-maximize"></i> Tipo de serviço *</label>
                             <select id="servico" required>
                                 <option value="">Selecione...</option>
-                                <option value="site institucional">Site institucional</option>
-                                <option value="loja virtual">Loja virtual</option>
-                                <option value="manutenção">Manutenção mensal</option>
-                                <option value="sistema personalizado">Sistema personalizado</option>
+                                <option value="site institucional locacao">Site institucional (Locação)</option>
+                                <option value="loja virtual locacao">Loja virtual (Locação)</option>
+                                <option value="manutenção">Manutenção mensal (Locação)</option>
+                                <option value="sistema modular aquisicao">Sistema modular (Aquisição)</option>
                                 <option value="outro">Outro</option>
                             </select>
                         </div>
@@ -1275,7 +1388,6 @@
                         </div>
                     </div>
                     
-                    <!-- NOVO BLOCO DE TELEFONE/WHATSAPP ATUALIZADO CONFORME SOLICITADO -->
                     <div class="phone-whatsapp-compact">
                         <div class="phone-icons-compact">
                             <i class="fas fa-mobile-alt"></i>
@@ -1320,7 +1432,6 @@
                 </div>
             </div>
 
-            <!-- QR CODE NO FOOTER (VERSÃO COMPLETA) -->
             <div class="qrcode-footer">
                 <img src="qr-code.png" alt="QR Code WEB TEC-TEC">
                 <h4><i class="fa-regular fa-qrcode"></i> Acesse pelo celular</h4>
@@ -1340,7 +1451,6 @@
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnamdueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NjA3ODQsImV4cCI6MjA1NjIzNjc4NH0.V-nF23Q0OXuJBNu_h4BQy8nJEdBm7q0pK9kadxEubnY';
 
-        // Inicializar Supabase
         let supabaseClient;
         try {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1349,7 +1459,6 @@
             console.error('❌ Erro Supabase:', error);
         }
 
-        // ===== FORMULÁRIO DE CONTATO =====
         const form = document.getElementById('contactForm');
         const successMsg = document.getElementById('successMessage');
         const errorMsg = document.getElementById('errorMessage');
@@ -1395,7 +1504,6 @@
             });
         }
 
-        // ===== MOBILE MENU =====
         const mobileBtn = document.getElementById('mobileBtn');
         const navMenu = document.getElementById('navMenu');
 
@@ -1408,7 +1516,6 @@
             });
         }
 
-        // Fechar menu ao clicar em link
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');

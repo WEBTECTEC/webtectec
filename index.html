@@ -344,7 +344,6 @@
             font-size: 0.95rem;
         }
 
-        /* Estilos específicos para badges de tecnologia */
         .postgresql-container {
             background: white;
             padding: 0.2rem 0.8rem;
@@ -543,7 +542,7 @@
             background: rgba(0,201,183,0.15);
         }
 
-        /* Portfólio */
+        /* Portfólio - ESTILOS PARA OS PROJETOS */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -609,49 +608,32 @@
             font-size: 1rem;
         }
 
-        .stat-badge i.fa-house-chimney-dollar {
-            color: #2ecc71;
-        }
+        /* Imóveis Maceió */
+        .stat-badge i.fa-house-chimney-dollar { color: #2ecc71; }
+        .stat-badge i.fa-key { color: #f39c12; }
+        .stat-badge i.fa-building { color: #3498db; }
+        .stat-badge i.fa-image { color: #9b59b6; }
+        .stat-badge i.fa-video { color: #e74c3c; }
+        .stat-badge i.fa-gear { color: #34495e; }
 
-        .stat-badge i.fa-key {
-            color: #f39c12;
-        }
+        /* Portal Piaçabuçu */
+        .stat-badge i.fa-landmark { color: #8e44ad; } /* Órgão público */
+        .stat-badge i.fa-newspaper { color: #e67e22; } /* Notícias */
+        .stat-badge i.fa-mobile-screen-button { color: #16a085; } /* Acessibilidade mobile */
+        .stat-badge i.fa-qrcode { color: #2980b9; } /* QR code */
+        .stat-badge i.fa-universal-access { color: #27ae60; } /* Acessibilidade */
+        .stat-badge i.fa-scale-balanced { color: #7f8c8d; } /* Transparência */
+        .stat-badge i.fa-calendar-check { color: #d35400; } /* Eventos/notícias */
+        .stat-badge i.fa-bullhorn { color: #c0392b; } /* Comunicação pública */
 
-        .stat-badge i.fa-building {
-            color: #3498db;
-        }
-
-        .stat-badge i.fa-image {
-            color: #9b59b6;
-        }
-
-        .stat-badge i.fa-video {
-            color: #e74c3c;
-        }
-
-        .stat-badge i.fa-gear {
-            color: #34495e;
-        }
-
-        .stat-badge i.fa-window-maximize {
-            color: #2c3e50;
-        }
-
-        .stat-badge i.fa-qrcode {
-            color: #e67e22;
-        }
-
-        .stat-badge i.fa-universal-access {
-            color: #16a085;
-        }
-
-        .stat-badge i.fa-clock {
-            color: #95a5a6;
-        }
-
-        .stat-badge i.fa-rocket {
-            color: #e74c3c;
-        }
+        /* Em breve */
+        .stat-badge i.fa-clock { color: #95a5a6; }
+        .stat-badge i.fa-rocket { color: #e74c3c; }
+        .stat-badge i.fa-lightbulb { color: #f1c40f; } /* Ideia/novo projeto */
+        .stat-badge i.fa-pen-ruler { color: #3498db; } /* Em desenvolvimento */
+        .stat-badge i.fa-code { color: #2c3e50; } /* Programação */
+        .stat-badge i.fa-paint-brush { color: #9b59b6; } /* Design */
+        .stat-badge i.fa-chart-line { color: #27ae60; } /* Crescimento/evolução */
 
         .portfolio-tech {
             padding: 1.5rem;
@@ -1372,7 +1354,7 @@
             <p class="section-sub" id="portfolioSub">Conheça alguns dos nossos trabalhos:</p>
 
             <div class="portfolio-grid" id="portfolioGrid">
-                <!-- Imóveis Maceió -->
+                <!-- PROJETO 1: Imóveis Maceió -->
                 <div class="portfolio-card">
                     <div class="portfolio-header">
                         <h3>Imóveis Maceió</h3>
@@ -1404,16 +1386,21 @@
                     </div>
                 </div>
 
-                <!-- Portal Piaçabuçu -->
+                <!-- PROJETO 2: Portal Piaçabuçu (Prefeitura) -->
                 <div class="portfolio-card">
                     <div class="portfolio-header" style="background: linear-gradient(135deg, #005CA9, #00A859);">
                         <h3>Portal Piaçabuçu</h3>
                         <div class="date">Prefeitura Municipal</div>
                     </div>
                     <div class="portfolio-stats">
-                        <span class="stat-badge"><i class="fa-regular fa-window-maximize"></i> Site oficial</span>
-                        <span class="stat-badge"><i class="fa-regular fa-qrcode"></i> QR code</span>
-                        <span class="stat-badge"><i class="fa-regular fa-universal-access"></i> Acessível</span>
+                        <span class="stat-badge"><i class="fa-solid fa-landmark"></i> Portal Oficial</span>
+                        <span class="stat-badge"><i class="fa-solid fa-newspaper"></i> Notícias Dinâmicas</span>
+                        <span class="stat-badge"><i class="fa-solid fa-scale-balanced"></i> Transparência</span>
+                    </div>
+                    <div class="portfolio-stats" style="border-top: 1px solid #e2e8f0; border-bottom: none;">
+                        <span class="stat-badge"><i class="fa-solid fa-mobile-screen-button"></i> Responsivo</span>
+                        <span class="stat-badge"><i class="fa-solid fa-qrcode"></i> QR Code</span>
+                        <span class="stat-badge"><i class="fa-solid fa-universal-access"></i> Acessível</span>
                     </div>
                     <div class="portfolio-tech">
                         <span class="tech-tag">HTML5</span>
@@ -1421,32 +1408,41 @@
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">PostgreSQL</span>
                         <span class="tech-tag">Alto Contraste</span>
+                        <span class="tech-tag">Serviços Públicos</span>
                         <span class="tech-tag">hospedagem de produção</span>
                     </div>
                     <div class="portfolio-footer">
-                        <span>Portal com notícias dinâmicas, transparência e serviços públicos.</span>
+                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary);"></i> Portal institucional com notícias dinâmicas, sistema de transparência pública e recursos de acessibilidade.</span>
                     </div>
                 </div>
 
-                <!-- Em breve -->
+                <!-- PROJETO 3: Em breve (Seu próximo projeto) -->
                 <div class="portfolio-card">
                     <div class="portfolio-header" style="background: linear-gradient(135deg, #FF6B6B, #4ECDC4);">
                         <h3>Em breve</h3>
                         <div class="date">Seu próximo projeto</div>
                     </div>
                     <div class="portfolio-stats">
-                        <span class="stat-badge"><i class="fa-regular fa-clock"></i> Em desenvolvimento</span>
-                        <span class="stat-badge"><i class="fa-regular fa-rocket"></i> Sob medida</span>
+                        <span class="stat-badge"><i class="fa-solid fa-lightbulb"></i> Sua Ideia</span>
+                        <span class="stat-badge"><i class="fa-solid fa-pen-ruler"></i> Desenvolvimento</span>
+                        <span class="stat-badge"><i class="fa-solid fa-code"></i> Personalizado</span>
+                    </div>
+                    <div class="portfolio-stats" style="border-top: 1px solid #e2e8f0; border-bottom: none;">
+                        <span class="stat-badge"><i class="fa-solid fa-paint-brush"></i> Design Exclusivo</span>
+                        <span class="stat-badge"><i class="fa-solid fa-chart-line"></i> Evolução Modular</span>
+                        <span class="stat-badge"><i class="fa-solid fa-rocket"></i> Sob Medida</span>
                     </div>
                     <div class="portfolio-tech">
                         <span class="tech-tag">HTML5</span>
                         <span class="tech-tag">CSS3</span>
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">hospedagem de produção</span>
                     </div>
                     <div class="portfolio-footer">
-                        <span>Pronto para criar seu projeto personalizado!</span>
+                        <span><i class="fa-regular fa-circle-check" style="color: var(--secondary);"></i> Pronto para transformar sua ideia em realidade com tecnologia de ponta e soluções personalizadas.</span>
                     </div>
                 </div>
             </div>

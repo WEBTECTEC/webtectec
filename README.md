@@ -13,7 +13,7 @@
 
 **WEB TEC-TEC** é uma empresa recém-criada especializada em desenvolvimento web, localizada em Maceió-AL. Oferecemos soluções digitais completas para pequenos e médios empreendedores, com foco em:
 
-- 🌐 Desenvolvimento de sites institucionais
+- 🌐 Desenvolvimento de sites comercial e institucionais
 - 🛒 Criação de lojas virtuais
 - 🔧 Manutenção e suporte contínuo
 - 🧩 Sistemas modulares personalizados

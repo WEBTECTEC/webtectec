@@ -107,20 +107,18 @@
         }
 
         /* Header - CORRIGIDO COM A NOVA COR #d1d5db */
+        /* Header - VERSÃO DE TESTE */
         .header {
-            background: rgba(209, 213, 219, 0.75);  /* #d1d5db com 75% de opacidade */
-            backdrop-filter: blur(8px);  /* Desfoque suave do conteúdo atrás */
-            -webkit-backdrop-filter: blur(8px);  /* Suporte para Safari */
+            background: #d1d5db !important;  /* Cor sólida sem transparência */
+            backdrop-filter: none !important;  /* Remove o desfoque */
+            -webkit-backdrop-filter: none !important;
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 50;
-            /* Gradiente dourado na borda - MANTIDO */
-            border-bottom: 3px solid transparent;
-            background-image: linear-gradient(rgba(209, 213, 219, 0.75), rgba(209, 213, 219, 0.75)), 
-                              linear-gradient(90deg, #CFB53B, #DAA520, #CFB53B);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
+            border-bottom: 3px solid #CFB53B;  /* Borda dourada sólida */
+            /* Remove o gradiente complexo */
+            background-image: none;
         }
 
         .header-container {

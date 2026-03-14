@@ -1601,10 +1601,10 @@
     </footer>
 
     <script>
-        // ===== CONFIGURAÇÃO SUPABASE =====
+        // ===== CONFIGURAÇÃO SUPABASE COM FALLBACK =====
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnamdueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NjA3ODQsImV4cCI6MjA1NjIzNjc4NH0.V-nF23Q0OXuJBNu_h4BQy8nJEdBm7q0pK9kadxEubnY';
-
+        
         let supabaseClient;
         try {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1612,12 +1612,12 @@
         } catch (error) {
             console.error('❌ Erro Supabase:', error);
         }
-
+        
         const form = document.getElementById('contactForm');
         const successMsg = document.getElementById('successMessage');
         const errorMsg = document.getElementById('errorMessage');
         const submitBtn = document.getElementById('submitBtn');
-
+        
         if (form) {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -1627,8 +1627,14 @@
                 
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fa-regular fa-spinner fa-spin"></i> Enviando...';
-
+        
                 try {
+                    // Verificação de conectividade
+                    const isOnline = await fetch('https://www.google.com', { mode: 'no-cors' }).catch(() => false);
+                    if (!isOnline) {
+                        throw new Error('Sem conexão com a internet');
+                    }
+        
                     const formData = {
                         nome: document.getElementById('nome').value,
                         email: document.getElementById('email').value,
@@ -1637,19 +1643,28 @@
                         descricao: document.getElementById('mensagem').value,
                         created_at: new Date().toISOString()
                     };
-
+        
+                    // Timeout para evitar espera infinita
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos
+        
                     const { error } = await supabaseClient
                         .from('orcamentos')
-                        .insert([formData]);
-
+                        .insert([formData], { signal: controller.signal });
+        
+                    clearTimeout(timeoutId);
+        
                     if (error) throw error;
-
+        
                     successMsg.style.display = 'block';
                     form.reset();
                     successMsg.scrollIntoView({ behavior: 'smooth' });
-
+        
                 } catch (error) {
-                    console.error('Erro:', error);
+                    console.error('Erro detalhado:', error);
+                    
+                    // Mensagem mais amigável
+                    errorMsg.innerHTML = '<i class="fa-regular fa-circle-exclamation"></i> Não foi possível conectar ao servidor. Por favor, nos chame no WhatsApp (82) 9.9998-1912 ou tente novamente mais tarde.';
                     errorMsg.style.display = 'block';
                 } finally {
                     submitBtn.disabled = false;

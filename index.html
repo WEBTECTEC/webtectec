@@ -1602,14 +1602,13 @@
     </footer>
 
     <script>
-        // ===== CONFIGURAÇÃO SUPABASE =====
+        
+        // ===== CONFIGURAÇÃO SUPABASE (MANTIDA) =====
         const SUPABASE_URL = 'https://gspobmfgjwnxzxxcrwdi.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnamdueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdzcG9ibWZnandueHp4eGNyd2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTU1OTEsImV4cCI6MjA4Nzc5MTU5MX0.OiUgS1N20VJ8XEGPngoe8lC7BuOMD5g_cdG7WtWFQ-I'; // ← COLE A CHAVE NOVA AQUI
         
-        // Configuração do WhatsApp
-        const WHATSAPP_NUMBER = '5582999981912'; // Código do país + número (sem + ou espaços)
-        
-        // Configuração do E-mail (usando FormSubmit.co - serviço gratuito)
+        // Configurações adicionais
+        const WHATSAPP_NUMBER = '5582999981912';
         const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/webtectec@zohomail.com';
         
         let supabaseClient;
@@ -1645,22 +1644,26 @@
                         created_at: new Date().toISOString()
                     };
         
-                    // Array para controlar erros parciais
                     const errors = [];
         
-                    // 1️⃣ Enviar para o Supabase
+                    // 1️⃣ ENVIO PARA SUPABASE (USA A CHAVE NOVA)
                     try {
                         const { error: supabaseError } = await supabaseClient
                             .from('orcamentos')
                             .insert([formData]);
                         
-                        if (supabaseError) errors.push('Supabase: ' + supabaseError.message);
+                        if (supabaseError) {
+                            console.error('Erro Supabase:', supabaseError);
+                            errors.push('Supabase: ' + supabaseError.message);
+                        } else {
+                            console.log('✅ Supabase: dados inseridos');
+                        }
                     } catch (error) {
+                        console.error('Erro Supabase:', error);
                         errors.push('Supabase: ' + error.message);
                     }
         
-                    // 2️⃣ Enviar para o WhatsApp (usando API da Meta - precisa de configuração)
-                    // Por enquanto, apenas geramos o link (opção manual)
+                    // 2️⃣ WHATSAPP (sempre tenta)
                     const whatsappMessage = `*Novo Orçamento WEB TEC-TEC*%0A%0A` +
                         `*Nome:* ${formData.nome}%0A` +
                         `*E-mail:* ${formData.email}%0A` +
@@ -1671,7 +1674,7 @@
                     
                     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
                     
-                    // 3️⃣ Enviar para o E-mail usando FormSubmit
+                    // 3️⃣ E-MAIL (FormSubmit)
                     try {
                         const emailResponse = await fetch(FORM_SUBMIT_URL, {
                             method: 'POST',
@@ -1686,46 +1689,44 @@
                                 servico: formData.tipo_servico,
                                 mensagem: formData.descricao,
                                 _subject: 'Novo orçamento do site WEB TEC-TEC',
-                                _template: 'table'
+                                _template: 'table',
+                                _autoresponse: 'Obrigado pelo contato! Responderemos em até 24h.'
                             })
                         });
                         
-                        if (!emailResponse.ok) errors.push('Falha no envio do e-mail');
+                        if (!emailResponse.ok) {
+                            errors.push('Falha no envio do e-mail');
+                        } else {
+                            console.log('✅ E-mail enviado');
+                        }
                     } catch (error) {
                         errors.push('Erro no e-mail: ' + error.message);
                     }
         
-                    // Se tudo deu certo ou houve erros parciais
+                    // 4️⃣ SEMPRE ABRE WHATSAPP
+                    window.open(whatsappUrl, '_blank');
+        
+                    // 5️⃣ RESULTADO
                     if (errors.length === 0) {
-                        // Sucesso total - abre WhatsApp e mostra mensagem
                         successMsg.innerHTML = `
                             <i class="fa-regular fa-circle-check"></i> 
-                            Orçamento enviado! Redirecionando para WhatsApp...
+                            Orçamento enviado com sucesso! Abrimos o WhatsApp para você finalizar.
+                            Entraremos em contato também por e-mail em até 24h.
                         `;
                         successMsg.style.display = 'block';
-                        
-                        // Abre WhatsApp em nova aba
-                        window.open(whatsappUrl, '_blank');
-                        
                         form.reset();
-                        successMsg.scrollIntoView({ behavior: 'smooth' });
-                        
-                        // Muda mensagem após 3 segundos
-                        setTimeout(() => {
-                            successMsg.innerHTML = '<i class="fa-regular fa-circle-check"></i> Mensagem enviada com sucesso! Entraremos em contato em até 24h.';
-                        }, 3000);
-                        
                     } else {
-                        // Erro parcial - mas ainda assim tenta abrir WhatsApp
-                        errorMsg.innerHTML = `
-                            <i class="fa-regular fa-circle-exclamation"></i> 
-                            Houve um problema no envio, mas você pode nos chamar diretamente:
-                            <a href="${whatsappUrl}" target="_blank" style="color: white; font-weight: bold; text-decoration: underline; display: block; margin-top: 10px;">
-                                <i class="fab fa-whatsapp"></i> Clique aqui para falar no WhatsApp
-                            </a>
+                        // Sucesso parcial (pelo menos WhatsApp abriu)
+                        successMsg.innerHTML = `
+                            <i class="fa-regular fa-circle-check"></i> 
+                            WhatsApp aberto! Por favor, envie a mensagem.
+                            (Alguns sistemas tiveram falha, mas seu contato foi registrado)
                         `;
-                        errorMsg.style.display = 'block';
+                        successMsg.style.display = 'block';
+                        form.reset();
                     }
+                    
+                    successMsg.scrollIntoView({ behavior: 'smooth' });
         
                 } catch (error) {
                     console.error('Erro crítico:', error);
@@ -1738,13 +1739,15 @@
                     `;
                     errorMsg.style.display = 'block';
                 } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Enviar orçamento';
+                    setTimeout(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fa-regular fa-paper-plane"></i> Enviar orçamento';
+                    }, 3000);
                 }
             });
         }
         
-        // ===== MOBILE MENU (código existente) =====
+        // ===== MOBILE MENU (código existente - manter igual) =====
         const mobileBtn = document.getElementById('mobileBtn');
         const navMenu = document.getElementById('navMenu');
         

@@ -17,8 +17,9 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://unpkg.com">
     
-    <!-- Font Awesome completo -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Pré-carregamento otimizado do Font Awesome (não bloqueia renderização) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     
     <!-- Supabase com defer para não bloquear renderização -->
     <script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -42,7 +43,7 @@
             --primary: #5a45ff;
             --primary-dark: #3b2bb3;
             --secondary: #00c9b7;
-            --secondary-dark: #006b60; /* Tom mais escuro para contraste */
+            --secondary-dark: #006b60;
             --accent: #ff8a5c;
             --dark: #0f172a;
             --gray: #2d3748;
@@ -1494,13 +1495,44 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* CSS crítico para Font Awesome - garante que os ícones apareçam imediatamente */
+        .fa, .fas, .far, .fab, .fa-regular, .fa-solid, .fa-brands {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .fa-regular, .fa-solid, .fa-brands {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+        
+        .fa-brands {
+            font-family: 'Font Awesome 6 Brands';
+        }
+        
+        .fa-regular {
+            font-weight: 400;
+        }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-container">
             <div class="logo-area">
-                <img src="wtlogo.jpg" alt="WEB TEC-TEC Logo" width="192" height="192" class="logo-image">
+                <!-- Logo com srcset para imagens responsivas -->
+                <img src="wtlogo.jpg" 
+                     srcset="wtlogo-90x90.jpg 90w, wtlogo-192x192.jpg 192w"
+                     sizes="(max-width: 768px) 90px, 192px"
+                     alt="WEB TEC-TEC Logo" 
+                     width="192" 
+                     height="192" 
+                     class="logo-image">
                 <div class="logo-text">
                     <h1>WEB <span class="tech">TEC-TEC</span></h1>
                     <div class="small">+🚀SITES</div>
@@ -1511,7 +1543,13 @@
 
             <a href="https://webtectec.github.io/.com.br/" target="_blank" style="text-decoration: none;">
                 <div class="qrcode-header">
-                    <img src="qr-code.png" alt="QR Code WEB TEC-TEC" width="76" height="76">
+                    <!-- QR Code com srcset para imagens responsivas -->
+                    <img src="qr-code.png"
+                         srcset="qr-code-50x50.png 50w, qr-code-76x76.png 76w"
+                         sizes="(max-width: 768px) 50px, 76px"
+                         alt="QR Code WEB TEC-TEC" 
+                         width="76" 
+                         height="76">
                     <div class="text">
                         <span><i class="fa-regular fa-qrcode"></i> Acesso rápido</span><br>
                         <small>escaneie e acesse</small>
@@ -2069,7 +2107,12 @@
             </div>
 
             <div class="qrcode-footer">
-                <img src="qr-code.png" alt="QR Code WEB TEC-TEC" width="120" height="120">
+                <img src="qr-code.png" 
+                     srcset="qr-code-120x120.png 120w, qr-code-76x76.png 76w"
+                     sizes="(max-width: 768px) 76px, 120px"
+                     alt="QR Code WEB TEC-TEC" 
+                     width="120" 
+                     height="120">
                 <h4><i class="fa-regular fa-qrcode"></i> Acesse pelo celular</h4>
                 <p>Escaneie o QR Code e visite nosso site</p>
                 <div class="site-url">webtectec.com.br</div>
